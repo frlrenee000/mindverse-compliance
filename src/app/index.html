@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mindverse · Compliance Research</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <header class="top"><strong>Mindverse</strong><span class="separator">/</span><span>Research workspace</span><button id="theme" aria-label="Toggle theme">Theme</button></header>
+  <main>
+    <header class="intro">
+      <div><h1>Compliance Research</h1><p>Research fictional policy documents, review cited findings, and approve a local publication.</p></div>
+      <span class="pill">Offline simulation</span>
+    </header>
+    <div id="error" class="error" role="alert" hidden></div>
+    <div class="workspace">
+      <div class="main-column">
+        <section class="panel">
+          <div class="panel-title"><h2>Workflow</h2><output id="status" aria-live="polite">Loading workspace…</output></div>
+          <ol class="pipeline" id="pipeline">
+            <li data-stage="retrieve"><strong>Retrieval</strong><span>Find scoped sources</span></li>
+            <li data-stage="analyze"><strong>Analysis</strong><span>Compare evidence</span></li>
+            <li data-stage="review"><strong>Review</strong><span>Check findings</span></li>
+            <li data-stage="approval"><strong>Approval</strong><span>Authorize local publish</span></li>
+          </ol>
+          <div id="actions" class="actions" hidden>
+            <button id="pause">Pause</button><button id="resume">Resume</button><button id="retry">Retry review</button>
+            <button id="approve" class="primary">Approve local publication</button><button id="cancel">Cancel run</button>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-title"><h2>Findings and evidence</h2><span id="receipt" class="pill" hidden></span></div>
+          <p id="evidence-empty" class="muted">Start a run to see findings and versioned sources.</p>
+          <ul id="findings" class="findings"></ul>
+          <div id="sources" class="sources"></div>
+        </section>
+        <details class="panel">
+          <summary>Research canvas</summary>
+          <div class="form-line"><label>Project name <input id="canvas-name" maxlength="100"></label><button id="add-note">Add note</button><button id="save-canvas">Save</button><button id="export-canvas">Export JSON</button><button id="import-canvas">Import JSON</button><input type="file" id="canvas-file" accept=".json,application/json" hidden></div>
+          <p class="muted">Canvas notes are saved separately from workflow runs.</p>
+          <div id="canvas" class="canvas"></div>
+          <div class="form-line"><label>From <select id="edge-source"></select></label><label>To <select id="edge-target"></select></label><button id="add-edge">Connect notes</button></div>
+          <ul id="edges"></ul><output id="canvas-status" aria-live="polite"></output>
+        </details>
+      </div>
+      <aside class="side-column">
+        <section class="panel">
+          <div class="panel-title"><h2>Research scope</h2><span id="version" class="muted"></span></div>
+          <form id="requirements">
+            <label>Market<select id="market"><option value="all">Hong Kong and Singapore</option><option value="HK">Hong Kong</option><option value="SG">Singapore</option></select></label>
+            <label>Topic<select id="topic"><option value="onboarding">Customer onboarding</option><option value="monitoring">Alert monitoring</option></select></label>
+            <label>Output language<select id="language"><option value="中文">中文</option><option value="English">English</option></select></label>
+            <label>Failure injection<select id="fault"><option value="none">None</option><option value="review">Review fails once</option><option value="timeout">Review times out</option><option value="receipt">Interruption after publication</option></select></label>
+            <div class="actions"><button id="start" class="primary" type="submit" disabled>Start run</button><button id="revise" type="button" disabled>Apply scope change</button></div>
+          </form>
+        </section>
+        <details class="panel">
+          <summary>Long-term memory</summary>
+          <p id="memory" class="muted"></p>
+          <div class="actions"><button id="save-memory">Remember output language</button><button id="clear-memory">Forget</button></div>
+        </details>
+        <details class="panel">
+          <summary>Evidence library</summary>
+          <p class="muted">Withdraw or restore a source to create a new version.</p>
+          <div id="library"></div>
+        </details>
+        <section class="panel">
+          <div class="panel-title"><h2>Run log</h2></div>
+          <label>History<select id="history" disabled></select></label>
+          <ol id="log" class="log"></ol>
+        </section>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

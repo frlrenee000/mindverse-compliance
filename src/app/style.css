@@ -1,0 +1,64 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f5f0; --surface: #fff; --ink: #1b2721; --muted: #526359;
+  --line: #dce3db; --primary: #14583f; --soft: #eaf4ed; --inverse: #fff;
+  --error: #983d20;
+  font-family: system-ui, sans-serif;
+}
+:root[data-theme=dark] {
+  color-scheme: dark;
+  --bg: #111916; --surface: #1b2520; --ink: #ecf5ed; --muted: #b0c4b6;
+  --line: #37483d; --primary: #a6dfbc; --soft: #243b2e; --inverse: #14231a;
+  --error: #ffab8e;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-size: 14px; }
+.top { display: flex; align-items: center; gap: 14px; min-height: 60px; padding: 0 max(24px, calc((100vw - 1220px) / 2)); background: var(--surface); border-bottom: 1px solid var(--line); white-space: nowrap; }
+.top strong { letter-spacing: -.035em; font-size: 18px; }
+.top button { margin-left: auto; }
+.separator, .muted, .top span, .pipeline span, small { color: var(--muted); }
+main { padding: 32px 24px 48px; max-width: 1268px; margin: auto; }
+.intro, .panel-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.intro { margin-bottom: 24px; }
+h1 { font-size: clamp(28px, 5vw, 44px); margin: 0; letter-spacing: -.055em; }
+h2 { font-size: 16px; margin: 0; letter-spacing: -.02em; }
+p { line-height: 1.55; }
+.intro p { color: var(--muted); margin: 6px 0 0; }
+.pill, #status { background: var(--soft); color: var(--primary); border-radius: 30px; font-weight: 650; padding: 5px 10px; font-size: 12px; }
+.workspace { display: grid; grid-template-columns: minmax(0, 2fr) minmax(270px, 1fr); gap: 18px; align-items: start; }
+.main-column, .side-column { display: grid; gap: 16px; min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 18px; min-width: 0; }
+.pipeline { padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; list-style: none; margin: 16px 0 0; }
+.pipeline li { min-height: 96px; border: 1px solid var(--line); border-radius: 9px; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
+.pipeline li.current { border-color: var(--primary); background: var(--soft); }
+.pipeline li.done strong { color: var(--primary); }
+.pipeline span, small { font-size: 11px; }
+button, select, input, textarea { font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 7px; min-width: 0; }
+button, select, input { min-height: 34px; padding: 5px 10px; }
+button { cursor: pointer; font-weight: 600; }
+button:hover:not(:disabled) { border-color: var(--primary); }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--primary); color: var(--inverse); border-color: var(--primary); }
+form { margin-top: 12px; }
+label { display: grid; gap: 4px; margin-bottom: 9px; font-size: 12px; color: var(--muted); }
+.actions, .form-line { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+.form-line label { margin: 0; }
+summary { cursor: pointer; font-weight: 650; }
+.sources { display: grid; gap: 8px; }
+.sources article, .library-row { border-top: 1px solid var(--line); padding-top: 9px; margin-top: 6px; }
+.sources p { margin: 5px 0 2px; }
+.library-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.error, .blocked { color: var(--error); }
+.error { margin-bottom: 16px; }
+.log, .findings { padding-left: 20px; overflow-wrap: anywhere; }
+.log li, .findings li { margin-block: 6px; }
+.log { font-size: 12px; color: var(--muted); max-height: 250px; overflow: auto; }
+.canvas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 8px; }
+.canvas article { display: grid; align-content: start; gap: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+.canvas textarea { width: 100%; min-height: 72px; padding: 7px; resize: vertical; }
+.canvas img { max-width: 100%; }
+#edges button { margin-left: 8px; }
+@media (max-width: 760px) { .workspace { grid-template-columns: 1fr; } .intro { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 420px) { .pipeline { grid-template-columns: repeat(2, 1fr); } main { padding: 20px 12px; } }
